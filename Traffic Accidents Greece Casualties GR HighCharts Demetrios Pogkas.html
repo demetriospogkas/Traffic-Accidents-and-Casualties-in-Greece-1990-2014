@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+			<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+			<script src="https://code.highcharts.com/highcharts.js"></script>
+			<script src="https://code.highcharts.com/modules/data.js"></script>
+</head>
+
+<body>
+<script type="text/javascript">
+$(function () {
+			Highcharts.setOptions({
+				lang: {
+					thousandsSep: '.',
+					numericSymbols: null
+				}
+			});
+
+		    $('#CasualtiesTotalsChart').highcharts({
+		        chart: {
+		            alignTicks: false,
+		                },
+
+				title: {
+		            text: '<b>' + 'Θύματα Τροχαίων Ατυχημάτων στην Ελλάδα 1990-2014' +'</b>' + '<br/>' + '<span style="font-size:11px">' + 'Σύνολο Παθόντων (Ελαφρά - Βαριά Τραυματίες, Νεκροί)' + '</span>' + '<br/>' + '<span style="font-size:11px">' + 'Vs. Νεκροί' + '</span>',
+					style: {
+							fontFamily: 'Calibri',
+							fontWeight: ''
+							}
+		                },
+		        subtitle: {
+		            text: '<i>' + 'Πηγή: ' + 'Τροχαία (μέσω Astynomia.gr) / Επεξεργασία, Ανάλυση και Οπτικοποίηση Δεδομένων: ' + '<a href="http://www.demetriospogkas.com" target="blank"><i>' + 'Δημήτριος Πόγκας' + '</i></a>',
+					style: {
+							fontFamily: 'Calibri',
+							fontWeight: ''
+							}
+		                  },
+		        xAxis: {
+		            type: 'datetime',
+		            labels: {
+		                overflow: 'justify'
+		                    },
+		            tickInterval: 365 * 24 * 3600000 * 5
+		                },
+		        yAxis:[
+		              { //---yAxis0
+		                 title: {
+		                        text: 'Παθόντες'
+		                         },
+		                 max: 36000,
+		                 tickInterval: 9000,
+		                 labels: {
+		                        enabled: true,
+		                        formatter: function() {
+         return Highcharts.numberFormat(this.value, 0, ',', '.')
+      }
+		                        },
+		                 opposite: false
+		              }, 
+		              { //---yAxis1
+		                 title: {
+		                        text: 'Νεκροί'
+		                         },
+		                 labels: {
+		                        enabled: true,
+		                        formatter: function() {
+         return Highcharts.numberFormat(this.value, 0, ',', '.')
+      }
+		                        },                         
+		                 min: 0.0,
+		                 max: 3600,
+		                 tickInterval: 900,
+		                 gridLineWidth: 0,
+		                 opposite: true
+		              }],
+
+		        legend: {
+		              itemStyle: {
+		                 fontSize:'15px',
+		                 fontFamily: 'Calibri',
+		                 color: ''
+					 			 }
+						},
+						
+		        tooltip: {
+		            formatter: function () {
+		                var s = '<b>' + Highcharts.dateFormat('%Y', this.x) + '</b>';
+
+		                $.each(this.points, function () {
+		                    s += '<br/>' + Highcharts.numberFormat(this.y, 0) + ' ' + this.series.options.tooltipText;
+		                });
+
+		                return s;
+		            },
+		            shared: true,
+		            crosshairs: true,
+					style: {
+		                 fontSize:'15px',
+		                 fontFamily: 'Calibri',
+		                 color: ''
+					 		}
+		                },
+				
+		        plotOptions: {
+		            spline: {
+		                lineWidth: 4,
+		                states: {
+		                    hover: {
+								enabled: false,
+		                        lineWidth: 5
+		                           }
+		                         },
+		                marker: {
+		                    enabled: false
+		                        },
+		                pointInterval: 365 * 24 * 3600000,
+		                pointStart: Date.UTC(1989, 12, 31)
+		                    },
+		            column: {
+		                marker: {
+		                    enabled: false
+		                        },
+		                pointPadding: 0,
+		                groupPadding: 0.1,
+						states: {
+		                    hover: {
+		                        enabled: true
+		                           }
+		                         },
+		                pointInterval: 365 * 24 * 3600000,
+		                pointStart: Date.UTC(1989, 12, 31),
+						pointEnd: Date.UTC(2013, 12, 31)
+		                    },
+		            series: {
+			             events: {
+			                    legendItemClick: function () {
+                                                  return false;
+			                                                 }
+			                     }
+		                    }
+		                     },
+		        series: [{
+		            zIndex: 2,
+		            yAxis: 0,
+		            type: 'column',
+		            name: 'Σύνολο Παθόντων',
+		            dashStyle: '',
+		            color: 'black',
+		            data: [
+					{y:  33126},
+					{y:  33794},
+					{y:  34781},
+					{y:  34653},
+					{y:  34135},
+					{y:  34043},
+					{y:  34876},
+					{y:  34990},
+					{y:  35342},
+					{y:  34532},
+					{y:  32482},
+					{y:  27920},
+					{y:  23861},
+					{y:  22176},
+					{y:  21322},
+					{y:  22930},
+					{y:  17842},
+					{y:  16411},
+					{y:  18571},
+					{y:  18352},
+					{y:  20059},
+					{y:  17890},
+					{y:  16094},
+					{y:  15690},
+					{y:  15085}
+						  ],
+		            tooltipText: 'Παθόντες Συνολικά',
+		        }, {
+		            zIndex: 5,
+		            yAxis: 1,
+		            type: 'column',
+		            name: 'Νεκροί',
+		            color: 'red',
+		            data: [
+					{y: 1981},
+					{y: 2012},
+					{y: 1995},
+					{y: 2008},
+					{y: 2076},
+					{y: 2149},
+					{y: 2175},
+					{y: 2141},
+					{y: 2229},
+					{y: 2181},
+					{y: 2103},
+					{y: 1911},
+					{y: 1655},
+					{y: 1613},
+					{y: 1547},
+					{y: 1470},
+					{y: 1493},
+					{y: 1449},
+					{y: 1550},
+					{y: 1463},
+					{y: 1281},
+					{y: 1092},
+					{y:  976},
+					{y:  865},
+					{y:  801}
+					],
+		            tooltipText: 'Νεκροί',
+		        }],
+		        navigation: {
+		            menuItemStyle: {
+		                fontSize: '10px'
+		            }
+		        }
+		    });
+		});
+
+</script>
+
+
+
+<div id="CasualtiesTotalsChart" style="min-width: ; height: ; margin: 0 auto"></div>
+
+</body>
+</html>		

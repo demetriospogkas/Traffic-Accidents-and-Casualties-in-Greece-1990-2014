@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/modules/data.js"></script>
+	</head>
+
+
+	<body>
+	<script type="text/javascript">
+	$(function () {
+	    var categories = ['1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014'];
+	    $(document).ready(function () {
+	        $('#CasualtiesAccidentChart').highcharts({
+	            chart: {
+	                type: 'bar'
+	            },
+	            title: {
+	                text: '<b>' + 'Νεκροί ανά Τροχαίο Ατύχημα στην Ελλάδα 1990-2014' + '<br/>' + '<span style="font-size:11px">' + '' + '</span>',
+					style: {
+							fontFamily: 'Calibri',
+							fontWeight: ''
+							}
+		                },
+		        subtitle: {
+		            text: '<i>' + 'Πηγή: ' + 'Τροχαία (μέσω Astynomia.gr) / Επεξεργασία, Ανάλυση και Οπτικοποίηση Δεδομένων: ' + '<a href="http://www.demetriospogkas.com" target="blank"><i>' + 'Δημήτριος Πόγκας' + '</i></a>',
+					style: {
+							fontFamily: 'Calibri',
+							fontWeight: ''
+							}
+		                  },
+	            xAxis: [{
+	                categories: categories,
+	                reversed: true,
+	                labels: {
+	                    step: 5
+	                }
+	            }],
+	            yAxis: [{//-----yAxis0
+	                title: {
+	                    text: ''
+	                },
+	                min: 0,
+	                max: 1.2,
+	                tickInterval: 0.6,
+	                labels: {
+	                    formatter: function () {
+	                        return Math.abs(this.value);
+	                    }
+	                },
+ 	                opposite: false,
+					plotLines: [{
+		                color: 'grey',
+		                width: 2,
+		                zIndex: 100,
+		                value: 1.05,
+	                label: {
+	                    text: '1 Νεκρός',
+    					style: {
+							fontFamily: 'Calibri',
+							fontWeight: ''
+							},
+	                    align: 'right',
+	                    x: 20,
+	                    y: 268,
+                        rotation: 360
+	           		     }		                
+		           			 }, {
+		                color: 'grey',
+		                width: 2,
+		                zIndex: 100,
+		                value: 0.06,
+						label: {
+	                    text: '0.06 Νεκρός',
+    					style: {
+							fontFamily: 'Calibri',
+							fontWeight: ''
+							},
+	                    align: 'right',
+	                    x: 50,
+	                    y: 268,
+                        rotation: 360
+	           		     }	
+		           			 }]
+	            }],
+
+		        legend: {
+		              itemStyle: {
+		                 fontSize:'15px',
+		                 fontFamily: 'Calibri',
+		                 color: ''
+					 			 }
+						},
+
+	            tooltip: {
+	            	shared: true,
+
+		            formatter: function () {
+		                var s = '<b>' + this.x + '</b>';
+
+		                $.each(this.points, function () {
+		                    s += '<br/>' + Highcharts.numberFormat(this.y, 3) + ' ' + this.series.options.tooltipText;
+		                });
+
+		                return s;
+	                					},
+					style: {
+	                 fontSize:'15px',
+	                 fontFamily: 'Calibri',
+	                 color: ''
+			 		}
+	            },
+
+	           	plotOptions: {
+		            bar: {
+		                marker: {
+		                    enabled: false
+		                        },
+		                pointPadding: 0,
+		                groupPadding: 0.1
+		                	},
+		            series: {
+			             events: {
+			                    legendItemClick: function () {
+                                                  return false;
+			                                                 }
+			                     }
+		                    }},
+
+	            series: [{
+	                name: 'Ανά Σύνολο Τροχαίων',
+	                data: [0.08738, 0.08679, 0.08269, 0.08241, 0.08689, 0.09148, 0.08962, 0.08675, 0.08954, 0.08979, 0.09163, 0.09715, 0.09877, 0.10243, 0.10046, 0.08824, 0.09539, 0.09907, 0.11416, 0.10868, 0.08499, 0.08013, 0.07924, 0.07176, 0.06825],
+	                color: 'black',
+	                tooltipText: 'Νεκρός ανά Σύνολο Τροχαίων'
+	            }, 
+	            {
+	                name: 'Ανά Θανατηφόρο Τροχαίο',
+	                data: [1.12365, 1.14906, 1.13288, 1.11308, 1.13257, 1.13224, 1.14474, 1.13161, 1.12576, 1.13358, 1.12641, 1.11624, 1.13512, 1.14478, 1.12591, 1.12128, 1.10511, 1.12152, 1.09618, 1.11339, 1.10241, 1.08012, 1.08565, 1.07855, 1.07229],
+	                color: 'red',
+	                tooltipText: 'Νεκρός ανά Θανατηφόρο Τροχαίο'
+	            }]
+	        });
+	    });
+
+	});
+	</script>
+
+	<div id="CasualtiesAccidentChart" style="min-width: 310px; max-width: ; height: ; margin: 0 auto"></div>
+
+	</body>
+</html>
