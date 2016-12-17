@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="http://code.highcharts.com/maps/highmaps.js"></script>
+	<script src="http://code.highcharts.com/mapdata/countries/gr/gr-all.js"></script>
+	<script src="https://code.highcharts.com/modules/data.js"></script>
+</head>
+
+<body>
+    <script type="text/javascript">
+        $(function () {
+            Highcharts.setOptions({
+                lang: {
+                    thousandsSep: '.',
+                    numericSymbols: null
+                      }
+                                });
+            var data = [
+                {
+                    "hc-key": "gr-at",
+                    "value": -0.0303595009,
+                    tooltipText: 'Attica',
+                    valueAccs: 48875,
+                    valueFats:  1848,
+                    valueAffs: 60547,
+                    valueCasus: 1946
+                },
+                {
+                    "hc-key": "gr-mt",
+                    "value": 0.0931060166,
+                    tooltipText: 'Eastern Macedonia and Thrace',
+                    valueAccs: 4027,
+                    valueFats:  449,
+                    valueAffs: 5735,
+                    valueCasus: 490
+                },        
+                {
+                    "hc-key": "gr-mc",
+                    "value": -0.0486932191,
+                    tooltipText: 'Central Macedonia (incl. Thessaloniki)',
+                    valueAccs:  16275,
+                    valueFats:  933,
+                    valueAffs: 21790,
+                    valueCasus: 1215
+                },
+                {
+                    "hc-key": "gr-mw",
+                    "value": 0.0307375477,
+                    tooltipText: 'Western Macedonia',
+                    valueAccs:  1012,
+                    valueFats: 173,
+                    valueAffs: 1586,
+                    valueCasus: 198
+                },
+                {
+                    "hc-key": "gr-ep",
+                    "value": -0.0204211363,
+                    tooltipText: 'Epirus',
+                    valueAccs: 984,
+                    valueFats: 281,
+                    valueAffs: 1693,
+                    valueCasus: 318
+                },
+                {
+                    "hc-key": "gr-ts",
+                    "value": 0.041323224,
+                    tooltipText: 'Thessaly',
+                    valueAccs: 2674,
+                    valueFats: 506,
+                    valueAffs: 3828,
+                    valueCasus: 564
+                },
+                {
+                    "hc-key": "gr-ii",
+                    "value": 0.1412890212,
+                    tooltipText: 'Ionian Islands',
+                    valueAccs: 1557,
+                    valueFats: 180,
+                    valueAffs: 2062,
+                    valueCasus: 189
+                },        
+                {
+                    "hc-key": "gr-gw",
+                    "value": 0.0989790372,
+                    tooltipText: 'Western Greece',
+                    valueAccs: 4120,
+                    valueFats: 664,
+                    valueAffs: 6198,
+                    valueCasus: 760
+                },
+                {
+                    "hc-key": "gr-gc",
+                    "value": 0.2100240401,
+                    tooltipText: 'Sterea Ellada',
+                    valueAccs: 4452,
+                    valueFats: 617,
+                    valueAffs: 6474,
+                    valueCasus: 674
+                },
+                {
+                    "hc-key": "gr-pp",
+                    "value": 0.0858772866,
+                    tooltipText: 'Peloponnese',
+                    valueAccs: 4962,
+                    valueFats: 646,
+                    valueAffs: 7269,
+                    valueCasus: 720
+                },
+                {
+                    "hc-key": "gr-an",
+                    "value": -0.0116915483,
+                    tooltipText: 'North Aegean',
+                    valueAccs: 759,
+                    valueFats: 105,
+                    valueAffs: 991,
+                    valueCasus: 110
+                },
+                {
+                    "hc-key": "gr-as",
+                    "value": -0.158989715,
+                    tooltipText: 'South Aegean',
+                    "valueAccs": 2437,
+                    "valueFats": 305,
+                    "valueAffs": 3300,
+                    "valueCasus": 320
+                },
+                {
+                    "hc-key": "gr-cr",
+                    "value": 0.0105978262,
+                    tooltipText: 'Crete',
+                    "valueAccs": 2310,
+                    "valueFats": 479,
+                    "valueAffs": 3281,
+                    "valueCasus": 524
+                }
+            ];              
+
+            $('#RegionsIndexMapEN').highcharts('Map', {
+                title : {
+                    text : '<b>' + 'Traffic Accidents in Greece by Region 2008-2014' + '</b>' + '<br/>' + '<span style="font-size:11px">' + 'Each Region has been matched with the respective General Regional Police Directorate' + '</span>' + '<br/>' + '<span style="font-size:11px">' +'(GRPD of Central Macedonia includes GPD of Thessaloniki)' + '</span>',
+                    style: {
+                            fontFamily: 'Calibri',
+                            fontWeight: ''
+                            }
+                        },
+
+                    subtitle: {
+                        text: '<i>' + 'Data Source: ' + 'Hellenic Road Traffic Police (via Astynomia.gr) / Data Analysis and Visualisation: ' + '<a href="http://www.demetriospogkas.com" target="blank"><i>' + 'DemetriosPogkas.com' + '</i></a>',
+                        style: {
+                                fontFamily: 'Calibri',
+                                fontWeight: ''
+                                }
+                              },
+
+                    mapNavigation: {
+                        enabled: false,
+                        buttonOptions: {
+                            verticalAlign: 'bottom'
+                        },
+                        enableDoubleClickZoomTo: false
+                    },
+
+                    colorAxis: {
+                        min: -0.16,
+                        tickInterval: 0.16,
+                        minColor: '#ff4c4c',
+                        maxColor: '#fffcfc',
+                        marker: {
+                        color: 'black'
+                            }
+                    },
+
+                    legend: {
+                        title: {
+                            text:'Region Composite Performance Index',
+                            style: {
+                                fontFamily: 'Calibri',
+                                fontWeight: 'bold'
+                                    }
+                                }
+                            },  
+
+                    tooltip: {
+                        shared: false,
+                        formatter: function () {
+                            return '<b>' + this.point.tooltipText + '</b><br>' +
+                                'Total Accidents: ' + Highcharts.numberFormat(this.point.valueAccs, 0, '.', ',') + '<br>' +
+                                'Fatal Accidents: ' + Highcharts.numberFormat(this.point.valueFats, 0, '.', ',') + '<br>' +
+                                'Total Casualties: ' + Highcharts.numberFormat(this.point.valueAffs, 0, '.', ',') + '<br>' +
+                                'Fatalities: ' + Highcharts.numberFormat(this.point.valueCasus, 0, '.', ',');
+                        },
+
+                        style: {
+                                 fontSize:'15px',
+                                 fontFamily: 'Calibri',
+                                 color: ''
+                                }
+                    },
+
+                    series : [{
+                        data : data,
+                        mapData: Highcharts.maps['countries/gr/gr-all'],
+                        joinBy: 'hc-key',
+                        name: 'Region Composite Performance Index',
+                        states: {
+                            hover: {
+                                color: '#000000'
+                            }
+                        },
+                        dataLabels: {
+                            enabled: false,
+                            format: '{point.options.name}'
+                        }
+                    }]
+            });
+            
+        console.log($('#RegionsIndexMapEN').highcharts());
+        });
+    </script>
+
+    <div id="RegionsIndexMapEN" style="height: 600px; margin: 0 auto;">&nbsp;</div>
+</body>
+</html>

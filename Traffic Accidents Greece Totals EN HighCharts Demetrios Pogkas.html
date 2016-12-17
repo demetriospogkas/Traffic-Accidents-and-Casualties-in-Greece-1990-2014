@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+			<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+			<script src="https://code.highcharts.com/highcharts.js"></script>
+			<script src="https://code.highcharts.com/modules/data.js"></script>
+</head>
+
+<body>
+	<script type="text/javascript">
+		$(function () {
+				Highcharts.setOptions({
+					lang: {
+						thousandsSep: ',',
+						numericSymbols: null
+					}
+				});
+
+	    $('#AccidentsChartEN').highcharts({
+	        chart: {
+	            alignTicks: false,
+	                },
+
+			title: {
+	            text: '<b>' + 'Traffic Accidents in Greece 1990-2014' +'</b>' + '<br/>' + '<span style="font-size:11px">' + 'Total Accidents(Minor, Severe and Fatal Accidents Combined) Vs.' + '</span>' + '<br/>' + '<span style="font-size:11px">' + 'Fatal Accidents (At Least 1 Fatality)' + '</span>',
+	            useHTML: Highcharts.hasBidiBug,
+				style: {
+						fontFamily: 'Calibri',
+						fontWeight: ''
+						}
+	                },
+	        subtitle: {
+	            text: '<i>' + 'Data Source: ' + 'Hellenic Road Traffic Police (via Astynomia.gr) / Data Analysis and Visualisation: ' + '<a href="http://www.demetriospogkas.com" target="blank"><i>' + 'DemetriosPogkas.com' + '</i></a>',
+				style: {
+						fontFamily: 'Calibri',
+						fontWeight: ''
+						}
+	                  },
+	        xAxis: {
+	            type: 'datetime',
+	            labels: {
+	                overflow: 'justify'
+	                    },
+	            tickInterval: 365 * 24 * 3600000 * 5
+	                },
+	        yAxis:[
+	              { //---yAxis0
+	                 title: {
+	                        text: 'Total'
+	                         },
+	                 max: 25000,
+	                 tickInterval: 5000,
+	                 labels: {
+	                        enabled: true,
+	                        formatter: function() {
+     return Highcharts.numberFormat(this.value, 0, '.', ',')
+  }
+	                        },
+	                 opposite: false
+	              }, 
+	              { //---yAxis1
+	                 title: {
+	                        text: 'Fatal'
+	                         },
+	                 labels: {
+	                        enabled: true,
+	                        formatter: function() {
+     return Highcharts.numberFormat(this.value, 0, '.', ',')
+  }
+	                        },                         
+	                 min: 0.0,
+	                 max: 2500,
+	                 tickInterval: 500,
+	                 gridLineWidth: 0,
+	                 opposite: true
+	              }],
+
+	        legend: {
+	              itemStyle: {
+	                 fontSize:'15px',
+	                 fontFamily: 'Calibri',
+	                 color: ''
+				 			 }
+					},
+					
+	        tooltip: {
+	            formatter: function () {
+	                var s = '<b>' + Highcharts.dateFormat('%Y', this.x) + '</b>';
+
+	                $.each(this.points, function () {
+	                    s += '<br/>' + Highcharts.numberFormat(this.y, 0, '.', ',') + ' ' + this.series.options.tooltipText;
+	                });
+
+	                return s;
+	            },
+	            shared: true,
+	            crosshairs: true,
+				style: {
+	                 fontSize:'15px',
+	                 fontFamily: 'Calibri',
+	                 color: ''
+				 		}
+	                },
+			
+	        plotOptions: {
+	            spline: {
+	                lineWidth: 4,
+	                states: {
+	                    hover: {
+							enabled: false,
+	                        lineWidth: 5
+	                           }
+	                         },
+	                marker: {
+	                    enabled: false
+	                        },
+	                pointInterval: 365 * 24 * 3600000,
+	                pointStart: Date.UTC(1989, 12, 31)
+	                    },
+	            column: {
+	                marker: {
+	                    enabled: false
+	                        },
+	                pointPadding: 0,
+	                groupPadding: 0.1,
+					states: {
+	                    hover: {
+	                        enabled: true
+	                           }
+	                         },
+	                pointInterval: 365 * 24 * 3600000,
+	                pointStart: Date.UTC(1989, 12, 31),
+					pointEnd: Date.UTC(2013, 12, 31)
+	                    },
+	            series: {
+		             events: {
+		                    legendItemClick: function () {
+                                              return false;
+		                                                 }
+		                     }
+	                    }
+	                     },
+	        series: [{
+	            zIndex: 2,
+	            yAxis: 0,
+	            type: 'column',
+	            name: 'Total Accidents',
+	            dashStyle: '',
+	            color: 'black',
+	            data: [
+				{y:  22672},
+				{y:  23182},
+				{y:  24125},
+				{y:  24365},
+				{y:  23893},
+				{y:  23492},
+				{y:  24269},
+				{y:  24681},
+				{y:  24894},
+				{y:  24289},
+				{y:  22952},
+				{y:  19670},
+				{y:  16756},
+				{y:  15747},
+				{y:  15399},
+				{y:  16660},
+				{y:  15652},
+				{y:  14626},
+				{y:  13577},
+				{y:  13461},
+				{y:  15072},
+				{y:  13628},
+				{y:  12317},
+				{y:  12054},
+				{y:  11737}
+					  ],
+	            tooltipText: 'Accidents in Total',
+	        },{
+	            zIndex: 5,
+	            yAxis: 1,
+	            type: 'column',
+	            name: 'Fatal Accidents',
+	            color: 'red',
+	            data: [
+				{y: 1763},
+				{y: 1751},
+				{y: 1761},
+				{y: 1804},
+				{y: 1833},
+				{y: 1898},
+				{y: 1900},
+				{y: 1892},
+				{y: 1980},
+				{y: 1924},
+				{y: 1867},
+				{y: 1712},
+				{y: 1458},
+				{y: 1409},
+				{y: 1374},
+				{y: 1311},
+				{y: 1351},
+				{y: 1292},
+				{y: 1414},
+				{y: 1314},
+				{y: 1162},
+				{y: 1011},
+				{y:  899},
+				{y:  802},
+				{y:  747}
+				],
+	            tooltipText: 'Fatal Accidents',
+	        }],
+	        navigation: {
+	            menuItemStyle: {
+	                fontSize: '10px'
+	            }
+	        }
+	    });
+	});
+	</script>
+
+	<div id="AccidentsChartEN" style="min-width: 310px; height: 400px; margin: 0 auto;">&nbsp;</div>
+</body>
+</html>		
